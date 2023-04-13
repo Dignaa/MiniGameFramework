@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <world>
+        <maxX>100</maxX>
+        <maxY>100</maxY>
+    </world>
+    <creature>
+        <startHealth>100</startHealth>
+        <damage>10</damage>
+    </creature>
+</configuration>

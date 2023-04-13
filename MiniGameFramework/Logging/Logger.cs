@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MiniGameFramework.Models
+namespace MiniGameFramework.Logging
 {
-    internal class DefenceItem
+    internal class Logger
     {
     }
 }
