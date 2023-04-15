@@ -1,0 +1,9 @@
+GameTraceSource Information: 0 : New logger created
+GameTraceSource Error: 1 : Couldn't recover value of:maxX
+GameTraceSource Error: 2 : Couldn't recover value of:maxY
+GameTraceSource Information: 3 : Default values for world are set. MaxX: 0, MaxY: 0
+GameTraceSource Error: 4 : Couldn't recover value of:startHealth
+GameTraceSource Error: 5 : Couldn't recover value of:damage
+GameTraceSource Information: 6 : Default values for creature are set. Default damage: 0, default health: 0
+GameTraceSource Information: 7 : Configuration done: 15/04/2023 15:25:10
+GameTraceSource Information: 8 : World is created

@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniGameFramework", "MiniGameFramework\MiniGameFramework.csproj", "{4115E9F2-B2AB-491D-BED9-23F6596C30C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniGameFramework", "MiniGameFramework\MiniGameFramework.csproj", "{4115E9F2-B2AB-491D-BED9-23F6596C30C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniGameTest", "MiniGameTest\MiniGameTest.csproj", "{15CA01B1-7E10-4682-9150-813D5B289A99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{4115E9F2-B2AB-491D-BED9-23F6596C30C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4115E9F2-B2AB-491D-BED9-23F6596C30C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4115E9F2-B2AB-491D-BED9-23F6596C30C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15CA01B1-7E10-4682-9150-813D5B289A99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15CA01B1-7E10-4682-9150-813D5B289A99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15CA01B1-7E10-4682-9150-813D5B289A99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15CA01B1-7E10-4682-9150-813D5B289A99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

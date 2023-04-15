@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "MiniGameTest/1.0.0": {
+        "dependencies": {
+          "MiniGameFramework": "1.0.0"
+        },
+        "runtime": {
+          "MiniGameTest.dll": {}
+        }
+      },
+      "MiniGameFramework/1.0.0": {
+        "runtime": {
+          "MiniGameFramework.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MiniGameTest/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MiniGameFramework/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

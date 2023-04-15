@@ -18,6 +18,11 @@ namespace MiniGameFramework.Models
         public float X { get; set; }
         public float? Y { get; set; }
 
+        /// <summary>
+        /// Get distance between a creature and a given position
+        /// </summary>
+        /// <param name="end"></param>
+        /// <returns>float Distance</returns>
         public float GetDistance(Position end)
         {
             float dx = end.X - X;

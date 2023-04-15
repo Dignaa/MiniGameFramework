@@ -1,0 +1,12 @@
+C:\School\Sem4\AdvancedSoftware\MiniGameFramework\MiniGameFramework\obj\Debug\net6.0\MiniGameFramework.csproj.AssemblyReference.cache
+C:\School\Sem4\AdvancedSoftware\MiniGameFramework\MiniGameFramework\obj\Debug\net6.0\MiniGameFramework.GeneratedMSBuildEditorConfig.editorconfig
+C:\School\Sem4\AdvancedSoftware\MiniGameFramework\MiniGameFramework\obj\Debug\net6.0\MiniGameFramework.AssemblyInfoInputs.cache
+C:\School\Sem4\AdvancedSoftware\MiniGameFramework\MiniGameFramework\obj\Debug\net6.0\MiniGameFramework.AssemblyInfo.cs
+C:\School\Sem4\AdvancedSoftware\MiniGameFramework\MiniGameFramework\obj\Debug\net6.0\MiniGameFramework.csproj.CoreCompileInputs.cache
+C:\School\Sem4\AdvancedSoftware\MiniGameFramework\MiniGameFramework\bin\Debug\net6.0\MiniGameFramework.deps.json
+C:\School\Sem4\AdvancedSoftware\MiniGameFramework\MiniGameFramework\bin\Debug\net6.0\MiniGameFramework.dll
+C:\School\Sem4\AdvancedSoftware\MiniGameFramework\MiniGameFramework\bin\Debug\net6.0\MiniGameFramework.pdb
+C:\School\Sem4\AdvancedSoftware\MiniGameFramework\MiniGameFramework\obj\Debug\net6.0\MiniGameFramework.dll
+C:\School\Sem4\AdvancedSoftware\MiniGameFramework\MiniGameFramework\obj\Debug\net6.0\refint\MiniGameFramework.dll
+C:\School\Sem4\AdvancedSoftware\MiniGameFramework\MiniGameFramework\obj\Debug\net6.0\MiniGameFramework.pdb
+C:\School\Sem4\AdvancedSoftware\MiniGameFramework\MiniGameFramework\obj\Debug\net6.0\ref\MiniGameFramework.dll
