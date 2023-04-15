@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MiniGameFramework.Logging;
+using System.Diagnostics;
 
 namespace MiniGameFramework.Models
 {
@@ -23,11 +19,39 @@ namespace MiniGameFramework.Models
         /// </summary>
         /// <param name="end"></param>
         /// <returns>float Distance</returns>
-        public float GetDistance(Position end)
+        public float GetDistance(Position start, Position end)
         {
-            float dx = end.X - X;
-            float dy = end.Y.GetValueOrDefault() - Y.GetValueOrDefault();
+            float dx = end.X - start.X;
+            float dy = end.Y.GetValueOrDefault() - start.Y.GetValueOrDefault();
             return (float)Math.Sqrt(dx * dx + dy * dy);
+        }
+
+        public static bool operator ==(Position? p1, Position? p2)
+        {
+            if (ReferenceEquals(p1, p2))
+            {
+                return true;
+            }
+
+            if (p1 is null || p2 is null)
+            {
+                return false;
+            }
+
+            return p1.X == p2.X && p1.Y == p2.Y;
+        }
+
+        public static bool operator !=(Position? p1, Position? p2)
+        {
+            return !(p1== p2);
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || !(obj is Position))
+                return false;
+            else
+                return this == (Position)obj;
         }
     }
 }

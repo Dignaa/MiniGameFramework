@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MiniGameFramework.Logging;
 using MiniGameFramework.Models.Items;
 
 namespace MiniGameFramework.Models.GameObjects
@@ -12,9 +8,14 @@ namespace MiniGameFramework.Models.GameObjects
         public WorldObject(string name, bool lootable, bool removable, List<Item>? inventory, Position? position)
             : base(name, position)
         {
-            Inventory = inventory;
             Lootable = lootable;
             Removable = removable;
+            if(lootable == true)
+                Inventory = inventory;
+
+            if (inventory != null && lootable == false)
+                Logger.GetInstance().Log(System.Diagnostics.TraceEventType.Error, "An object that is not lootable cannot have an inventory");
+
         }
         public bool Lootable { get; set; }
         public bool Removable { get; set; }
@@ -43,9 +44,9 @@ namespace MiniGameFramework.Models.GameObjects
         /// <returns>World object</returns>
         public WorldObject? Pick()
         {
-            if (this.Removable == true)
+            if (Removable == true)
             {
-                this.ObjectPosition = null;
+                ObjectPosition = null;
                 return this;
             }
             return null;

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 
 namespace MiniGameFramework.Logging
 {
@@ -51,12 +46,22 @@ namespace MiniGameFramework.Logging
             return _instance;
         }
 
-
+        /// <summary>
+        /// Add a log with auto generated id
+        /// </summary>
+        /// <param name="eventType"></param>
+        /// <param name="message"></param>
         public void Log(TraceEventType eventType, string message)
         {
             traceSource.TraceEvent(eventType, _eventId++, message);
         }
 
+        /// <summary>
+        /// Add log with specified id
+        /// </summary>
+        /// <param name="eventType"></param>
+        /// <param name="id"></param>
+        /// <param name="message"></param>
         public void Log(TraceEventType eventType,int id, string message)
         {
             traceSource.TraceEvent(eventType, id, message);

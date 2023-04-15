@@ -1,10 +1,5 @@
 ﻿using MiniGameFramework.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MiniGameFramework.Models.GameObjects
 {
@@ -29,14 +24,16 @@ namespace MiniGameFramework.Models.GameObjects
             World? world = World._instance;
             if (world != null)
             {
-                List<GameObject> objects = world.GameObjects?.Where(o => o.ObjectPosition == position).ToList() ?? new List<GameObject>();
+                List<GameObject> objects = world.GameObjects?.Where(o => o.ObjectPosition == position)?.ToList() ?? new List<GameObject>();
                 return objects;
             }
             else
             {
-                logger.Log(TraceEventType.Error, "Cannot get objects as the world is not created");
+                logger.Log(TraceEventType.Error, "Cannot get any objects as the world is not created");
                 return new List<GameObject>();
             }
         }
+
+
     }
 }

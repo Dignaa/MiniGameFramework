@@ -64,7 +64,7 @@ namespace MiniGameFramework.Models.GameObjects
         {
             var result = new HitResult();
 
-            if (ObjectPosition != null && position.GetDistance(ObjectPosition) <= attackItem.Range)
+            if (ObjectPosition != null && position.GetDistance(ObjectPosition, position) <= attackItem.Range)
             {
                 int damage = attackItem.Damage + this.Damage;
                 result = GetHitResult(position, damage);
@@ -126,6 +126,8 @@ namespace MiniGameFramework.Models.GameObjects
                 creature.Health = currentHealth;
             else
                 IsDead = true;
+                Logger.GetInstance().Log(TraceEventType.Information, $"Creature --- {creature.Name} --- is dead");
+
 
         }
     }

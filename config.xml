@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <world>
-        <maxX>100</maxX>
-        <maxY>100</maxY>
+        <maxX>2000</maxX>
+        <maxY>2000</maxY>
     </world>
     <creature>
-        <startHealth>100</startHealth>
-        <damage>10</damage>
+        <startHealth>200</startHealth>
+        <damage>20</damage>
     </creature>
       <path> C:\School\Sem4\AdvancedSoftware\MiniGameFramework\log.txt </path>
 </configuration>

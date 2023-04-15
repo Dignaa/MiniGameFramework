@@ -2,7 +2,6 @@
 using MiniGameFramework.Models;
 using MiniGameFramework.Models.GameObjects;
 using System.Diagnostics;
-using System.Reflection;
 using System.Xml;
 
 namespace MiniGameFramework.Configuration
@@ -19,13 +18,13 @@ namespace MiniGameFramework.Configuration
         {
             configDoc.Load(filePath);
 
-            ConfigureLog();
+            ConfigureLogger();
             ConfigureWorld();
             ConfigureCreature();
             Logger.GetInstance().Log(TraceEventType.Information, "Configuration done: " + DateTime.Now );
         }
 
-        private void ConfigureLog()
+        private void ConfigureLogger()
         {
             string path = "";
 
@@ -80,18 +79,18 @@ namespace MiniGameFramework.Configuration
             {
                 string xxStr = xxNode.InnerText.Trim();
 
-                int xx = Convert.ToInt32("test");
+                int xx = Convert.ToInt32(xxStr);
 
                 return xx;
             }
             catch (FormatException)
             {
-                Logger.GetInstance().Log(TraceEventType.Error, "Couldn't recover value of:" + xxNode.Name);
+                Logger.GetInstance().Log(TraceEventType.Error, $"Couldn't recover value of: {xxNode.Name}, value will be set to 0");
                 return 0;
             }
             catch (ArgumentException) 
             { 
-                Logger.GetInstance().Log(TraceEventType.Error, "Couldn't recover value of:" + xxNode.Name);
+                Logger.GetInstance().Log(TraceEventType.Error, $"Couldn't recover value of: {xxNode.Name}, value will be set to 0");
                 return 0;
             }
 

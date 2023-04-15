@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+﻿using System.Diagnostics;
 using MiniGameFramework.Logging;
 using MiniGameFramework.Models.GameObjects;
 
@@ -36,7 +30,7 @@ namespace MiniGameFramework.Models
         /// <param name="gameObjects"></param>
         /// <returns>World</returns>
         /// <exception cref="InvalidOperationException"></exception>
-        public static World CreateInstance(int maxX, int maxY, List<GameObject>? gameObjects)
+        public static World CreateInstance(int? maxX, int? maxY, List<GameObject>? gameObjects)
         {
             if (_instance == null)
             {
@@ -50,6 +44,11 @@ namespace MiniGameFramework.Models
             return _instance;
         }
 
+        /// <summary>
+        /// Assigns default values for the world from config file
+        /// </summary>
+        /// <param name="maxX"></param>
+        /// <param name="maxY"></param>
         public static void SetDefaultValues(int maxX, int maxY)
         {
             DefaultMaxX = maxX;
