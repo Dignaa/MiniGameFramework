@@ -6,7 +6,7 @@ namespace MiniGameFramework.Models
 {
     public class HitResult
     {
-        public WorldObject? HitObject { get; set; }
-        public List<Item>? HitItems { get; set; }
+        public WorldObject? HitReturnObject { get; set; }
+        public List<Item>? HitReturnItems { get; set; }
     }
 }

@@ -6,26 +6,36 @@ using System.Xml;
 
 namespace MiniGameFramework.Configuration
 {
-    public class Config
+    public static class Config
     {
-        XmlDocument configDoc = new XmlDocument();
+        private static ILogger? _logger;
+        private static XmlDocument configDoc = new XmlDocument();
 
         /// <summary>
         /// Add configuration from a file to the game
         /// </summary>
         /// <param name="fileName"></param>
-        public void ConfigureFromFile(string filePath)
+        public static void ConfigureFromFile(string filePath, ILogger logger)
         {
+            _logger = logger;
+
+            if(_logger == null)
+                throw new ArgumentNullException(nameof(logger));
+
             configDoc.Load(filePath);
 
-            ConfigureLogger();
             ConfigureWorld();
             ConfigureCreature();
-            Logger.GetInstance().Log(TraceEventType.Information, "Configuration done: " + DateTime.Now );
+            _logger.Log(TraceEventType.Information, "Configuration done: " + DateTime.Now );
         }
 
-        private void ConfigureLogger()
+        /// <summary>
+        /// Creates a logger file from the info in config file. Has to be created
+        /// </summary>
+        /// <returns></returns>
+        public static Logger ConfigureLogger(string filePath)
         {
+            configDoc.Load(filePath);
             string path = "";
 
             XmlNode? xNode = configDoc.DocumentElement?.SelectSingleNode("path");
@@ -33,11 +43,10 @@ namespace MiniGameFramework.Configuration
             if (xNode != null)
                 path = xNode.InnerText.Trim();
 
-
-            Logger logger = Logger.CreateInstance(path);
+             return Logger.CreateInstance(path);
         }
 
-        private void ConfigureWorld()
+        private static void ConfigureWorld()
         {
             int maxX = 0;
             int maxY = 0;
@@ -55,7 +64,7 @@ namespace MiniGameFramework.Configuration
             World.SetDefaultValues(maxX, maxY);
         }
 
-        private void ConfigureCreature()
+        private static void ConfigureCreature()
         {
             int startHealth = 0;
             int damage = 0;
@@ -73,7 +82,7 @@ namespace MiniGameFramework.Configuration
             Creature.SetDefaultValues(damage, startHealth);
         }
 
-        private int ConvertInt(XmlNode xxNode)
+        private static int ConvertInt(XmlNode xxNode)
         {
             try
             {
@@ -85,12 +94,12 @@ namespace MiniGameFramework.Configuration
             }
             catch (FormatException)
             {
-                Logger.GetInstance().Log(TraceEventType.Error, $"Couldn't recover value of: {xxNode.Name}, value will be set to 0");
+                _logger?.Log(TraceEventType.Error, $"Couldn't recover value of: {xxNode.Name}, value will be set to 0");
                 return 0;
             }
             catch (ArgumentException) 
             { 
-                Logger.GetInstance().Log(TraceEventType.Error, $"Couldn't recover value of: {xxNode.Name}, value will be set to 0");
+                _logger?.Log(TraceEventType.Error, $"Couldn't recover value of: {xxNode.Name}, value will be set to 0");
                 return 0;
             }
 

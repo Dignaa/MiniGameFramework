@@ -1,4 +1,5 @@
-﻿using MiniGameFramework.Logging;
+﻿using MiniGameFramework.Inventories;
+using MiniGameFramework.Logging;
 using MiniGameFramework.Models.Items;
 using System;
 using System.Collections.Generic;
@@ -13,25 +14,26 @@ namespace MiniGameFramework.Models.GameObjects
 {
     public class Creature : GameObject
     {
+        private static ILogger? _logger;
         public static int DefaultHealth { get; set; } = 100;
         public static int DefaultDamage { get; set; } = 100;
 
-        public Creature(string name, Position position, int? damage, int? health, List<Item> items)
-            : base(name, position)
+        public Creature(string name, Position position, int? damage, int? health, Inventory inventory, AttackItem primaryAttackItem, DefenceItem primaryDefenceItem, ILogger logger)
+            : base(name, position, inventory, logger)
         {
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             if (damage != null)
                 Damage = (int)damage;
 
             if (health != null)
                 Health = (int)health;
-
-            Items = new List<Item>(items);
             IsDead = false;
         }
         public int Damage { get; set; } = DefaultDamage;
         public int Health { get; set; } = DefaultHealth;
-        public List<Item>? Items { get; set; }
-        public bool IsDead { get; set; }
+        public AttackItem PrimaryAttackItem { get; set; }
+        public DefenceItem PrimaryDefenceItem { get; set; }
+        public bool IsDead { get; private set; }
 
         /// <summary>
         /// Sets default values to a creture from a config file
@@ -42,7 +44,7 @@ namespace MiniGameFramework.Models.GameObjects
         {
             DefaultDamage = defaultDamage;
             DefaultHealth = defaultHeath;
-            Logger.GetInstance().Log(TraceEventType.Information, $"Default values for creature are set. Default damage: {defaultDamage}, default health: {defaultHeath}");
+            _logger?.Log(TraceEventType.Information, $"Default values for creature are set. Default damage: {defaultDamage}, default health: {defaultHeath}");
         }
 
         /// <summary>
@@ -66,8 +68,10 @@ namespace MiniGameFramework.Models.GameObjects
 
             if (ObjectPosition != null && position.GetDistance(ObjectPosition, position) <= attackItem.Range)
             {
-                int damage = attackItem.Damage + this.Damage;
+                int damage = PrimaryAttackItem.Damage + Damage;
                 result = GetHitResult(position, damage);
+                if(result.HitReturnItems != null) 
+                    result.HitReturnItems.ForEach(i=>Inventory.AddItem(i));
             }
             return result;
         }
@@ -96,12 +100,13 @@ namespace MiniGameFramework.Models.GameObjects
                 {
                     WorldObject worldObject = (WorldObject)obj;
                     WorldObject? pickedObject = worldObject.Pick();
-                    List<Item>? lootedItems = worldObject.Loot();
+                    List<Item> lootedItems = worldObject.Loot();
 
                     if (pickedObject != null)
-                        result.HitObject = pickedObject;
+                        result.HitReturnObject = pickedObject;
                     if (lootedItems != null)
-                        result.HitItems = lootedItems;
+                        result.HitReturnItems = lootedItems;
+                        lootedItems?.ForEach(i => Inventory.AddItem(i));
                 }
                 if (obj is Creature)
                 {
@@ -120,13 +125,16 @@ namespace MiniGameFramework.Models.GameObjects
         /// <param name="creature"></param>
         public void ReceiveHit(int damage, Creature creature)
         {
-            int currentHealth = creature.Health - damage;
+            int damageDealt = damage - PrimaryDefenceItem.ReduceDamage;
+            if(damageDealt < 0) damageDealt = 0;
+            int currentHealth = creature.Health - damageDealt;
 
             if (currentHealth >= 0)
                 creature.Health = currentHealth;
             else
                 IsDead = true;
-                Logger.GetInstance().Log(TraceEventType.Information, $"Creature --- {creature.Name} --- is dead");
+                RemoveFromWorld();
+                _logger?.Log(TraceEventType.Information, $"Creature --- {creature.Name} --- is dead and removed from world");
 
 
         }

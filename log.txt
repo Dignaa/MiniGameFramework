@@ -1,6 +1,5 @@
 GameTraceSource Information: 0 : New logger created
 GameTraceSource Information: 1 : Default values for world are set. MaxX: 2000, MaxY: 2000
-GameTraceSource Information: 2 : Default values for creature are set. Default damage: 20, default health: 200
-GameTraceSource Information: 3 : Configuration done: 15/04/2023 18:07:03
-GameTraceSource Error: 4 : An object that is not lootable cannot have an inventory
-GameTraceSource Information: 5 : World is created
+GameTraceSource Information: 2 : Configuration done: 16/04/2023 16:03:56
+GameTraceSource Information: 3 : World is created
+GameTraceSource Error: 4 : Cannot loot objects as the world and/or any objects do not exist

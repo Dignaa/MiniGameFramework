@@ -2,7 +2,7 @@
 
 namespace MiniGameFramework.Logging
 {
-    public class Logger
+    public class Logger : ILogger
     {
         private static Logger? _instance;
         private int _eventId;
@@ -37,10 +37,12 @@ namespace MiniGameFramework.Logging
             if (_instance == null)
             {
                 _instance = new Logger(fileName);
-                Logger.GetInstance().Log(TraceEventType.Information, "New logger created");
+                _instance.Log(TraceEventType.Information, "New logger created");
             }
             else
             {
+                _instance.Log(TraceEventType.Error, "Attempt to create logger failed, logger already exists");
+
                 throw new InvalidOperationException("Object instance is already created");
             }
             return _instance;
@@ -62,7 +64,7 @@ namespace MiniGameFramework.Logging
         /// <param name="eventType"></param>
         /// <param name="id"></param>
         /// <param name="message"></param>
-        public void Log(TraceEventType eventType,int id, string message)
+        public void Log(TraceEventType eventType, int id, string message)
         {
             traceSource.TraceEvent(eventType, id, message);
         }

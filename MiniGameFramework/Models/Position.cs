@@ -26,7 +26,7 @@ namespace MiniGameFramework.Models
             return (float)Math.Sqrt(dx * dx + dy * dy);
         }
 
-        public static bool operator ==(Position? p1, Position? p2)
+        public static bool operator == (Position? p1, Position? p2)
         {
             if (ReferenceEquals(p1, p2))
             {
@@ -50,8 +50,13 @@ namespace MiniGameFramework.Models
         {
             if (obj == null || !(obj is Position))
                 return false;
-            else
-                return this == (Position)obj;
+            
+            return this == (Position)obj;
+        }
+
+        public override int GetHashCode()
+        {
+            throw new NotImplementedException();
         }
     }
 }
