@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+qUML8jMejvv0mUBEuDfZdkIw/30DwcTZto4fCFbgra+8n+GAyDyr4bngOkIHF5a8dol92cW6YxC+tLd9lDlyA==",
+  "dgSpecHash": "SacFgrh61dZzA/K6Q52CWPfiEFZ9LkxjTkPE9RrGsYtsJ755581VhnhpTegZH7lkLYJQLb5JXCHpifUDVMwICg==",
   "success": true,
-  "projectFilePath": "C:\\School\\Sem4\\AdvancedSoftware\\MiniGameFramework\\MiniGameTest\\MiniGameTest.csproj",
+  "projectFilePath": "C:\\School\\MandatoryAssignments\\MiniGameFramework\\MiniGameTest\\MiniGameTest.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

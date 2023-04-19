@@ -32,11 +32,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\School\\Sem4\\AdvancedSoftware\\MiniGameFramework\\MiniGameTest\\MiniGameTest.csproj",
+      "projectUniqueName": "C:\\School\\MandatoryAssignments\\MiniGameFramework\\MiniGameTest\\MiniGameTest.csproj",
       "projectName": "MiniGameTest",
-      "projectPath": "C:\\School\\Sem4\\AdvancedSoftware\\MiniGameFramework\\MiniGameTest\\MiniGameTest.csproj",
+      "projectPath": "C:\\School\\MandatoryAssignments\\MiniGameFramework\\MiniGameTest\\MiniGameTest.csproj",
       "packagesPath": "C:\\Users\\dbrin\\.nuget\\packages\\",
-      "outputPath": "C:\\School\\Sem4\\AdvancedSoftware\\MiniGameFramework\\MiniGameTest\\obj\\",
+      "outputPath": "C:\\School\\MandatoryAssignments\\MiniGameFramework\\MiniGameTest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\dbrin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -53,8 +53,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\School\\Sem4\\AdvancedSoftware\\MiniGameFramework\\MiniGameFramework\\MiniGameFramework.csproj": {
-              "projectPath": "C:\\School\\Sem4\\AdvancedSoftware\\MiniGameFramework\\MiniGameFramework\\MiniGameFramework.csproj"
+            "C:\\School\\MandatoryAssignments\\MiniGameFramework\\MiniGameFramework\\MiniGameFramework.csproj": {
+              "projectPath": "C:\\School\\MandatoryAssignments\\MiniGameFramework\\MiniGameFramework\\MiniGameFramework.csproj"
             }
           }
         }

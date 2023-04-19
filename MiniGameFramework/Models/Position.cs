@@ -5,14 +5,14 @@ namespace MiniGameFramework.Models
 {
     public class Position
     {
-        public Position(float x, float? y)
+        public Position(float x, float y)
         {
             X = x;
             Y = y;
         }
 
         public float X { get; set; }
-        public float? Y { get; set; }
+        public float Y { get; set; }
 
         /// <summary>
         /// Get distance between a creature and a given position
@@ -22,7 +22,7 @@ namespace MiniGameFramework.Models
         public float GetDistance(Position start, Position end)
         {
             float dx = end.X - start.X;
-            float dy = end.Y.GetValueOrDefault() - start.Y.GetValueOrDefault();
+            float dy = end.Y - start.Y;
             return (float)Math.Sqrt(dx * dx + dy * dy);
         }
 

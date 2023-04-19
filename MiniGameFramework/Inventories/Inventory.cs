@@ -1,34 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MiniGameFramework.Models.Items;
+using MiniGameFramework.Models.Objects;
 
 namespace MiniGameFramework.Inventories
 {
-    public class Inventory
+    public class Inventory : IInventory
     {
         public Inventory()
         {
-            Items = new List<Item>();
+            Items = new List<IWorldObject>();
         }
-        public Inventory(List<Item> items)
+        public Inventory(List<IWorldObject> items)
         {
             Items = items;
         }
-        public List<Item> Items { get; set; }
+        public List<IWorldObject> Items { get; set; }
 
-        public void AddItem(Item item)
+        public void AddItem(IWorldObject item)
         {
-            if(item != null)
+            if (item != null)
                 Items.Add(item);
         }
         public void RemoveItem(int id)
         {
-            Item? itemToDelete = Items.Where(i => i.ItemId== id).FirstOrDefault();
+            IWorldObject? itemToDelete = Items.Where(i => i.ItemId == id).FirstOrDefault();
 
-            if(itemToDelete != null) 
+            if (itemToDelete != null)
                 Items.Remove(itemToDelete);
         }
     }

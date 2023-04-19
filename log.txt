@@ -1,5 +1,7 @@
 GameTraceSource Information: 0 : New logger created
 GameTraceSource Information: 1 : Default values for world are set. MaxX: 2000, MaxY: 2000
-GameTraceSource Information: 2 : Configuration done: 16/04/2023 16:03:56
+GameTraceSource Information: 2 : Configuration done: 19/04/2023 11:45:42
 GameTraceSource Information: 3 : World is created
-GameTraceSource Error: 4 : Cannot loot objects as the world and/or any objects do not exist
+GameTraceSource Warning: 4 : Cannot complete hit action as the creature action was invoked with is dead.
+GameTraceSource Information: 5 : Creature --- Tea --- is dead and removed from world
+GameTraceSource Warning: 6 : Cannot complete hit action as the creature action was invoked with is dead.

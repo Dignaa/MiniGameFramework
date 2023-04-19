@@ -1,6 +1,6 @@
 ﻿using MiniGameFramework.Logging;
 using MiniGameFramework.Models;
-using MiniGameFramework.Models.GameObjects;
+using MiniGameFramework.Models.GameObjects.Creatures;
 using System.Diagnostics;
 using System.Xml;
 

@@ -8,5 +8,5 @@
         <startHealth>200</startHealth>
         <damage>20</damage>
     </creature>
-      <path> C:\School\Sem4\AdvancedSoftware\MiniGameFramework\log.txt </path>
+      <path> C:\School\MandatoryAssignments\MiniGameFramework\log.txt </path>
 </configuration>

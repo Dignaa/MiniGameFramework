@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\School\\Sem4\\AdvancedSoftware\\MiniGameFramework\\MiniGameFramework\\MiniGameFramework.csproj",
+      "projectUniqueName": "C:\\School\\MandatoryAssignments\\MiniGameFramework\\MiniGameFramework\\MiniGameFramework.csproj",
       "projectName": "MiniGameFramework",
-      "projectPath": "C:\\School\\Sem4\\AdvancedSoftware\\MiniGameFramework\\MiniGameFramework\\MiniGameFramework.csproj",
+      "projectPath": "C:\\School\\MandatoryAssignments\\MiniGameFramework\\MiniGameFramework\\MiniGameFramework.csproj",
       "packagesPath": "C:\\Users\\dbrin\\.nuget\\packages\\",
-      "outputPath": "C:\\School\\Sem4\\AdvancedSoftware\\MiniGameFramework\\MiniGameFramework\\obj\\",
+      "outputPath": "C:\\School\\MandatoryAssignments\\MiniGameFramework\\MiniGameFramework\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\dbrin\\AppData\\Roaming\\NuGet\\NuGet.Config",

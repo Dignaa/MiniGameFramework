@@ -2,8 +2,9 @@
 using MiniGameFramework.Inventories;
 using MiniGameFramework.Logging;
 using MiniGameFramework.Models;
-using MiniGameFramework.Models.GameObjects;
+using MiniGameFramework.Models.GameObjects.Creatures;
 using MiniGameFramework.Models.Items;
+using MiniGameFramework.Models.Objects;
 
 string path = "../../../../config.xml";
 //Setup configuration
@@ -11,53 +12,68 @@ Logger logger = Config.ConfigureLogger(path);
 Config.ConfigureFromFile(path, logger);
 
 //Create world instance
-World world = World.CreateInstance(null, null, null, logger);
+World world = World.CreateInstance(null, null, null, null, logger);
 
-//Create test items
-DefenceItem item1 = new DefenceItem("Shield", "Protection", 25);
-AttackItem item2 = new AttackItem("Hammer", "Bang", 20, 2);
-Inventory inventory1 = new Inventory( new List<Item>() { item1, item2 });
+
 
 //Create test positions
 Position position1 = new Position(12, 0);
-Position position2 = new Position(15, 10);
-Position position3 = new Position(15, 0);
-Position position4 = new Position(12, 0);
+Position position2 = new Position(13, 0);
+Position position3 = new Position(15, 10);
+Position position4 = new Position(12, 5);
+
+//Create test items
+IWorldObject item1 = new DefenceObject("Shield", "Protection", 25, position1);
+IWorldObject item2 = new AttackObject("Hammer", "Bang", 20, 2, position2);
 
 //Create test game objects/add positions and inventories
-WorldObject object1 = new WorldObject("Chest", true, true,  position1, inventory1, logger);
-WorldObject object2 = new WorldObject("Tree", false, false, position3, inventory1, logger);
-Creature creature1 = new Creature("Bartol", position2, 15, 200, new Inventory(), null, null, logger);
+
+var chest = new LootableCompositeObject("Chest", "Chest full with things", position1, logger);
+
+chest.Add(item1);
+chest.Add(item2);
+
+IWorldObject object1 = new LootableCompositeObject("box", "A very nice box",  position1, logger);
+IWorldObject object2 = new RemovableObject("Tree", "Maple", position3, logger);
+Creature creature1 = new Creature("Bartol",  logger, position2, 15, 200);
+Creature creature2 = new Creature("Tea", logger, position1, 20, 170);
 
 //Create list of game objects for the world
-object1.AddToWorld();
-object2.AddToWorld();
-creature1.AddToWorld();
+world.AddObjectToWorld(object1);
+world.AddObjectToWorld(object2);
+world.AddObjectToWorld(chest);
+world.AddCreatureToWorld(creature1);
+world.AddCreatureToWorld(creature2);
 
 Console.WriteLine("******** ALL OBJECTS ***********");
-World._instance?.GameObjects.ForEach(o => Console.WriteLine(o.Name));
+world.WorldObjects.ForEach(o => Console.WriteLine(o.Name));
+world.Creatures.ForEach(o => Console.WriteLine(o.Name));
 Console.WriteLine("*****************************");
 //Test hit
-HitResult hitItems = creature1.Hit(position3);
+(List<IWorldObject>? looted, List<IWorldObject>? removed) hitItems = creature1.Hit(position1);
 
-if(hitItems.HitReturnItems != null)
-    hitItems.HitReturnItems.ForEach(i => Console.WriteLine(i.Name));
+(List<IWorldObject>? looted, List<IWorldObject> ?removed) hitItems2 = creature1.Hit(position3);
 
-if (hitItems.HitReturnObject != null)
-    Console.WriteLine(hitItems.HitReturnObject.Name);
+Console.WriteLine("*** Returned from hit ****");
 
-HitResult hitItems2 = creature1.Hit(position1);
-
-if (hitItems.HitReturnItems != null)
-    hitItems2.HitReturnItems?.ForEach(i => Console.WriteLine(i.Name));
-
-if (hitItems.HitReturnObject != null)
-    Console.WriteLine(hitItems2.HitReturnObject?.Name);
-
+if(hitItems.looted != null)
+    hitItems.looted.ForEach(i => Console.WriteLine(i.Name));
+if (hitItems.removed != null)
+    hitItems.removed.ForEach(i=> Console.WriteLine(i.Name));
 Console.WriteLine( position1.GetDistance(position1,position4));
 
 Console.WriteLine("******** OBJECTS AFTER HIT ***********");
-World._instance?.GameObjects.ForEach(o => Console.WriteLine(o.Name));
+world.WorldObjects.ForEach(o => Console.WriteLine(o.Name));
+world.Creatures.ForEach(o => Console.WriteLine(o.Name));
+
 
 Console.WriteLine("*******Creatures Items after fight***********");
 creature1.Inventory?.Items.ForEach(i=> Console.WriteLine(i.Name));
+
+while((creature1.IsDead == false) && (creature2.IsDead == false))
+{
+    creature1.Hit(creature2);
+    Console.WriteLine(creature2.Name + creature2.Health + creature2.State);
+    creature2.Hit(creature1);
+    Console.WriteLine(creature1.Name + creature1.Health + creature1.State);
+}
