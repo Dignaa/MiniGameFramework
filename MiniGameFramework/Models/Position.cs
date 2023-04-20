@@ -1,7 +1,4 @@
-﻿using MiniGameFramework.Logging;
-using System.Diagnostics;
-
-namespace MiniGameFramework.Models
+﻿namespace MiniGameFramework.Models
 {
     public class Position
     {

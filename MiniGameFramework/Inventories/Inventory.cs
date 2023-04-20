@@ -18,7 +18,9 @@ namespace MiniGameFramework.Inventories
         public void AddItem(IWorldObject item)
         {
             if (item != null)
+            {
                 Items.Add(item);
+            }
         }
         public void RemoveItem(int id)
         {

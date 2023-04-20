@@ -1,5 +1,4 @@
-﻿
-namespace MiniGameFramework.Models.Objects
+﻿namespace MiniGameFramework.Models.Objects
 {
     public class DefenceObject : IWorldObject
     {

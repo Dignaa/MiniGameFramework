@@ -1,7 +1,8 @@
 GameTraceSource Information: 0 : New logger created
-GameTraceSource Information: 1 : Default values for world are set. MaxX: 2000, MaxY: 2000
-GameTraceSource Information: 2 : Configuration done: 19/04/2023 11:45:42
-GameTraceSource Information: 3 : World is created
-GameTraceSource Warning: 4 : Cannot complete hit action as the creature action was invoked with is dead.
-GameTraceSource Information: 5 : Creature --- Tea --- is dead and removed from world
-GameTraceSource Warning: 6 : Cannot complete hit action as the creature action was invoked with is dead.
+GameTraceSource Information: 1 : Logger configuration done: 20/04/2023 12:11:52
+GameTraceSource Information: 2 : Default values for world are set. MaxX: 2000, MaxY: 2000
+GameTraceSource Information: 3 : World configuration done: 20/04/2023 12:11:52
+GameTraceSource Information: 4 : Creature configuration done: 20/04/2023 12:11:52
+GameTraceSource Information: 5 : World is created
+GameTraceSource Warning: 6 : Cannot complete hit action as the target is not within the range.
+GameTraceSource Information: 7 : Creature --- Bartol --- is dead and removed from world

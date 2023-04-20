@@ -1,6 +1,4 @@
 ﻿using MiniGameFramework.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace MiniGameFramework.Models.Objects

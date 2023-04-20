@@ -48,7 +48,7 @@ namespace MiniGameFramework.Models.GameObjects.Creatures
         public AttackObject PrimaryAttackObject { get; set; }
         public DefenceObject PrimaryDefenceObject { get; set; }
         public IInventory Inventory { get; set; }
-        public bool IsDead { get; private set; }
+        public bool IsDead { get; set; }
 
         public void ChangeState(ICreatureState newState)
         {
@@ -68,14 +68,9 @@ namespace MiniGameFramework.Models.GameObjects.Creatures
             _logger?.Log(TraceEventType.Information, $"Default values for creature are set. Default damage: {defaultDamage}, default health: {defaultHeath}");
         }
 
-        public void SetPrimaryAttackItem(AttackObject attackObject)
+        public void Move(Position distance)
         {
-            PrimaryAttackObject = attackObject;
-        }
-
-        public void SetPrimaryDefenceItem(DefenceObject defenceObject)
-        {
-            PrimaryDefenceObject = defenceObject;
+            ObjectPosition = new Position(ObjectPosition.X + distance.X, ObjectPosition.Y + distance.Y);
         }
 
         /// <summary>
@@ -83,10 +78,15 @@ namespace MiniGameFramework.Models.GameObjects.Creatures
         /// </summary>
         /// <param name="attackItem"></param>
         /// <param name="creature"></param>
-        public void Hit(Creature creature)
+        public virtual void Hit(Creature creature)
         {
-            if (IsDead == false && ObjectPosition != null && ObjectPosition.GetDistance(ObjectPosition, creature.ObjectPosition) <= PrimaryAttackObject.Range)
-                creature.ReceiveHit((PrimaryAttackObject?.Damage ?? 0) + Damage);
+            if (IsDead == false)
+            {
+                if(ObjectPosition != null && ObjectPosition.GetDistance(ObjectPosition, creature.ObjectPosition) <= PrimaryAttackObject.Range)
+                    creature.ReceiveHit((PrimaryAttackObject?.Damage ?? 0) + Damage);
+                else
+                    _logger?.Log(TraceEventType.Warning, "Cannot complete hit action as the target is not within the range.");
+            }
             else
                 _logger?.Log(TraceEventType.Warning, "Cannot complete hit action as the creature action was invoked with is dead.");
         }
@@ -96,12 +96,18 @@ namespace MiniGameFramework.Models.GameObjects.Creatures
         /// </summary>
         /// <param name="position"></param>
         /// <returns>All looted and removed objects</returns>
-        public (List<IWorldObject>? looted, List<IWorldObject>? removed) Hit(Position position)
+        public virtual (List<IWorldObject>? looted, List<IWorldObject>? removed) Hit(Position position)
         {
-            if (IsDead == false && ObjectPosition != null && position.GetDistance(ObjectPosition, position) <= PrimaryAttackObject.Range)
+            if (IsDead == false)
+            {
+                if (ObjectPosition != null && ObjectPosition.GetDistance(ObjectPosition, position) <= PrimaryAttackObject.Range)
                     return GetHitResult(position);
+                else
+                    _logger?.Log(TraceEventType.Warning, "Cannot complete hit action as the target is not within the range.");
+            }
             else
                 _logger?.Log(TraceEventType.Warning, "Cannot complete hit action as the creature action was invoked with is dead.");
+           
             return (null, null);
         }
 
@@ -143,12 +149,14 @@ namespace MiniGameFramework.Models.GameObjects.Creatures
                         case AttackObject attackObj:
                             resultLootedItems.Add(attackObj);
                             Inventory.AddItem(attackObj);
+                            attackObj.ObjectPosition = ObjectPosition;
                             break;
 
-                        case DefenceObject defenseObj:
-                            resultLootedItems.Add(defenseObj);
-                            Inventory.AddItem(defenseObj);
-                            break;
+                        case DefenceObject defenceObj:
+                            resultLootedItems.Add(defenceObj);
+                            Inventory.AddItem(defenceObj);
+                            defenceObj.ObjectPosition = ObjectPosition;
+                        break;
 
                         default:
                             _logger?.Log(TraceEventType.Warning, "Object cannot be picked or looted from the game world.");
@@ -185,18 +193,8 @@ namespace MiniGameFramework.Models.GameObjects.Creatures
             }
             else
             {
-                IsDead = true;
-                World? world = World._instance;
-                if (world != null)
-                {
-                    world.RemoveCreatureFromWorld(this);
-                    _logger?.Log(TraceEventType.Information, $"Creature --- {Name} --- is dead and removed from world");
-                }
-                else
-                {
-                    _logger?.Log(TraceEventType.Error, "Cannot remove a creature if the world doesn't exist");
-
-                }
+                Health = 0;
+                ChangeState(new DeadState(_logger));
             }
         }
     }

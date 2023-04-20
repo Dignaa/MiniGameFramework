@@ -1,13 +1,7 @@
-﻿using MiniGameFramework.Inventories;
-using MiniGameFramework.Logging;
-using MiniGameFramework.Models.GameObjects.Creatures;
+﻿using MiniGameFramework.Logging;
 using MiniGameFramework.Models.Objects;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace MiniGameFramework.Models.Items
 {
@@ -31,6 +25,7 @@ namespace MiniGameFramework.Models.Items
 
         public void Add(IWorldObject item)
         {
+            item.ObjectPosition = ObjectPosition;
             items.Add(item);
         }
 

@@ -6,34 +6,32 @@ using System.Xml;
 
 namespace MiniGameFramework.Configuration
 {
-    public static class Config
+    public class Config : IConfig
     {
         private static ILogger? _logger;
         private static XmlDocument configDoc = new XmlDocument();
+
 
         /// <summary>
         /// Add configuration from a file to the game
         /// </summary>
         /// <param name="fileName"></param>
-        public static void ConfigureFromFile(string filePath, ILogger logger)
+        public ILogger ConfigureFromFile(string filePath)
         {
-            _logger = logger;
-
-            if(_logger == null)
-                throw new ArgumentNullException(nameof(logger));
-
             configDoc.Load(filePath);
 
+            _logger = ConfigureLogger(filePath);
             ConfigureWorld();
             ConfigureCreature();
-            _logger.Log(TraceEventType.Information, "Configuration done: " + DateTime.Now );
+
+            return _logger;
         }
 
         /// <summary>
         /// Creates a logger file from the info in config file. Has to be created
         /// </summary>
         /// <returns></returns>
-        public static Logger ConfigureLogger(string filePath)
+        private static ILogger ConfigureLogger(string filePath)
         {
             configDoc.Load(filePath);
             string path = "";
@@ -43,7 +41,10 @@ namespace MiniGameFramework.Configuration
             if (xNode != null)
                 path = xNode.InnerText.Trim();
 
-             return Logger.CreateInstance(path);
+             _logger = Logger.CreateInstance(path);
+
+            _logger.Log(TraceEventType.Information, "Logger configuration done: " + DateTime.Now);
+            return _logger;
         }
 
         private static void ConfigureWorld()
@@ -62,6 +63,8 @@ namespace MiniGameFramework.Configuration
                 maxY = ConvertInt(yNode);
 
             World.SetDefaultValues(maxX, maxY);
+            _logger.Log(TraceEventType.Information, "World configuration done: " + DateTime.Now);
+
         }
 
         private static void ConfigureCreature()
@@ -80,6 +83,8 @@ namespace MiniGameFramework.Configuration
                 damage = ConvertInt(dNode);
 
             Creature.SetDefaultValues(damage, startHealth);
+            _logger.Log(TraceEventType.Information, "Creature configuration done: " + DateTime.Now);
+
         }
 
         private static int ConvertInt(XmlNode xxNode)
